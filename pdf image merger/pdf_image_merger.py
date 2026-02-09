@@ -220,7 +220,37 @@ class PDFMergerApp:
             bg=self.bg_color,
             fg="#666666"
         )
-        self.status_label.pack(pady=(10, 0))
+        self.status_label.pack(pady=(10, 5))
+
+        # Credit line with hyperlink
+        credit_frame = tk.Frame(main_container, bg=self.bg_color)
+        credit_frame.pack(pady=(0, 5))
+
+        credit_label = tk.Label(
+            credit_frame,
+            text="Created by ",
+            font=("Arial", 8),
+            bg=self.bg_color,
+            fg="#999999"
+        )
+        credit_label.pack(side=tk.LEFT)
+
+        # Hyperlinked name
+        self.link_label = tk.Label(
+            credit_frame,
+            text="Suyash Dwivedi",
+            font=("Arial", 8, "underline"),
+            bg=self.bg_color,
+            fg="#2196F3",
+            cursor="hand2"
+        )
+        self.link_label.pack(side=tk.LEFT)
+        self.link_label.bind("<Button-1>", lambda e: self.open_link("https://meta.wikimedia.org/wiki/User:Suyash.dwivedi"))
+
+    def open_link(self, url):
+        """Open URL in default web browser"""
+        import webbrowser
+        webbrowser.open(url)
 
     def on_width_change(self, selection):
         """Show/hide custom width entry based on selection"""
